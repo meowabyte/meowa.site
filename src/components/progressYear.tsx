@@ -12,7 +12,7 @@ const EVENTS: { date: `${number}-${number}`, title: string, className?: string, 
 
 const formatDate = (date: `${number}-${number}`): string => {
     const [monthStr, dayStr] = date.split("-")
-    return `${dayStr} ${MONTHS[parseInt(monthStr) - 1].slice(0, 3)}`
+    return `${dayStr} ${MONTHS[parseInt(monthStr, 10) - 1].slice(0, 3)}`
 }
 
 const calculateProgress = (time: Date = new Date()) => {
@@ -34,18 +34,18 @@ export default function ProgressYear() {
             <div className="w-full h-10 flex flex-row bg-surface0">
                 <div className="relative w-full h-full">
                     {
-                        EVENTS.map(({ date, title, className, link }) => {
+                        EVENTS.map(({ date, title, className, link }, i) => {
                             const progress = calculateProgress(new Date(`${now.getFullYear()}-${date}`))
 
                             const el = <div style={{ "--progress": `${progress}%` }} className={cn("absolute h-full w-2 transition-all duration-200 hover:w-8 z-10 left-(--progress) -translate-x-1/2 not-hover:*:hidden", className)}>
                                 <span className="absolute top-[calc(100%+10px)] w-52"><b>{formatDate(date)}</b> - {title}</span>
                             </div>
 
-                            if (link) return <a href={link} title="Visit related source" target="_blank">{el}</a>
-                            else return el
+                            if (link) return <a key={`event-${i}`} href={link} title="Visit related source" target="_blank" rel="noreferrer">{el}</a>
+                            return el
                         })
                     }
-                    <div style={{ "--progress": `${timePassed}%` }} className="z-0 top-0 left-0 absolute w-(--progress) h-full bg-green"></div>
+                    <div style={{ "--progress": `${timePassed}%` }} className="z-0 top-0 left-0 absolute w-(--progress) h-full bg-green" />
                 </div>
             </div>
             <div className="w-full flex flex-row place-content-between">

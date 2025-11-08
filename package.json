@@ -5,11 +5,13 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "lint": "eslint",
     "deploy": "bun run build && wrangler publish"
   },
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.8.0",
     "itty-router": "^5.0.22",
+    "lucide-preact": "^0.553.0",
     "preact": "^10.27.2",
     "preact-iso": "^2.11.0",
     "tailwindcss": "^4.1.17"
@@ -24,11 +26,9 @@
     "eslint-config-preact": "^2.0.0",
     "preact-render-to-string": "^6.6.3",
     "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3",
     "vite": "^7.2.2",
     "wrangler": "^4.46.0"
-  },
-  "eslintConfig": {
-    "extends": "preact"
   },
   "trustedDependencies": [
     "@tailwindcss/oxide"

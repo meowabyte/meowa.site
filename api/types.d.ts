@@ -1,4 +1,4 @@
 declare namespace Cloudflare {
-    interface Env {
-    }
+    // interface Env {
+    // }
 }

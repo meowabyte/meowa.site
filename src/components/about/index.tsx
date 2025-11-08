@@ -1,22 +1,50 @@
-import ytImg from "@/assets/yt.webp"
+import ytImg from "@/assets/imgs/yt.webp"
 import LinkedAnchor from "../linkedAnchor"
 import Section from "./section"
-import { IconType, SiBluesky, SiDiscord, SiGithub, SiYoutube } from "@icons-pack/react-simple-icons"
+import { IconType, SiBluesky, SiDiscord, SiGithub, SiTelegram, SiYoutube } from "@icons-pack/react-simple-icons"
+import { type LucideIcon, Mail } from "lucide-preact"
+import { useCallback, useMemo, useState } from "preact/hooks"
+import { cn } from "@/helpers"
+import Link from "../link"
 
 type SocialButtonProps = {
-    icon: IconType,
-    url: string,
-    name: string
+    icon: IconType | LucideIcon,
+    name: string,
+    url?: string,
+    text?: string
 }
-function SocialButton({ name, url, icon }: SocialButtonProps) {
+function SocialButton({ icon, name, text, url }: SocialButtonProps) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const Icon = icon as any // react typing problem :(
 
-    return <a role="button" href={url} className="" title={`Visit ${name}`}>
-        <div className="flex flex-row gap-3 border p-3 bg-crust not-active:hover:scale-105 transition-transform duration-200">
-            <Icon title={`Visit ${name}`} size={30} />
-            {name}
-        </div>
-    </a>
+    const [copied, setCopied] = useState(false)
+
+    const tooltipText = useMemo(() => {
+        if (text) return `Copy ${name} to clipboard`
+        if (url) return `Visit ${name}`
+    }, [name, text, url])
+
+    const onClick = useCallback(() => {
+        if (copied) return;
+
+        if (text)
+            return navigator.clipboard.writeText(text)
+                .then(() => {
+                    setCopied(true)
+                    setTimeout(() => setCopied(false), 1000)
+                })
+                .catch(e => {
+                    console.error(`Could not copy ${name} to clipboard... `, e)
+                    alert("Could not copy to clipboard... Maybe no permissions?")
+                })
+        if (url)
+            return window.open(url, "_blank")
+    }, [name, text, url, copied])
+
+    return <button onClick={onClick} title={tooltipText} className={cn("flex flex-row gap-3 border p-3 bg-crust not-active:hover:scale-105 transition-all duration-200", copied && "text-green border-green")}>
+        <Icon title={tooltipText} size={30} />
+        {copied ? "Copied!" : name}
+    </button>
 }
 
 export default function AboutMe() {
@@ -32,7 +60,7 @@ export default function AboutMe() {
                     or just content creating!
                 </span>
                 <span>
-                    My most known projects currently are <a href="https://github.com/meowabyte/VencordPlugins" target="_blank">My Vencord Plugins</a>, <a href="https://github.com/meowabyte/gif-validator" target="_blank">GIFs Validator</a> or <a href="https://github.com/meowabyte/pak-patcher" target="_blank">PAK Patcher</a>.
+                    My most known projects currently are <Link href="https://github.com/meowabyte/VencordPlugins">My Vencord Plugins</Link>, <Link href="https://github.com/meowabyte/gif-validator">GIFs Validator</Link> or <Link href="https://github.com/meowabyte/pak-patcher">PAK Patcher</Link>.
                     You can check them out on my GitHub profile!
                 </span>
             </div>
@@ -42,10 +70,10 @@ export default function AboutMe() {
             image={ytImg}
             place="right"
         >
-            I work on a <a className="important" href="https://youtube.com/@meowabyte" target="_blank">successful YouTube channel</a> (1K+ subscribers)
+            I work on a <Link className="important" href="https://youtube.com/@meowabyte">successful YouTube channel</Link> (1K+ subscribers)
             under the same name, where I create videos
             about various interesting secrets or facts
-            from indie games, such as <a href="https://undertale.com/" target="_blank">UNDERTALE</a> or <a href="https://store.steampowered.com/app/420530/OneShot" target="_blank">OneShot</a>!
+            from indie games, such as <Link href="https://undertale.com/">UNDERTALE</Link> or <Link href="https://store.steampowered.com/app/420530/OneShot">OneShot</Link>!
         </Section>
         <Section
             title={<h2><LinkedAnchor id="social">There's <span className="important">more</span>?!</LinkedAnchor></h2>}
@@ -68,12 +96,14 @@ export default function AboutMe() {
             className="flex flex-col gap-5"
         >
             <span>
-                <span className="important">Of course there is!</span> I show myself on
-                many more places than just ones I mentioned above!
-                You can check the ones below!
+                <span className="important">Sure!</span> You can contact me through
+                ways below! Depending on my availability I might respond quickly or
+                after some time so give me some time please!
             </span>
             <div className="flex flex-row gap-5 justify-center">
-                <SocialButton icon={{}} name="E-Mail" url="mailto:contact@meowabyte.lol" />
+                <SocialButton icon={Mail} name="E-Mail" url="mailto:contact@meowabyte.lol" />
+                <SocialButton icon={SiTelegram} name="Telegram" url="https://meowabyte.t.me" />
+                <SocialButton icon={SiDiscord} name="Discord" text=".kb." />
             </div>
         </Section>
     </>

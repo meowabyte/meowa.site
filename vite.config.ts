@@ -6,6 +6,7 @@ import { defineConfig, UserConfig } from 'vite';
 import { join } from "path"
 
 // https://vitejs.dev/config/
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default defineConfig(async ({ mode }) => {
 	const cfg: UserConfig = {
 		resolve: {

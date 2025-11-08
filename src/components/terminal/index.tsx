@@ -100,7 +100,7 @@ export default function Terminal({ className }: TerminalProps = {}) {
                 ["OS", ["Arch Linux", "Windows 10 LTSC"]],
                 ["LANGUAGES", ["TypeScript", "Rust"]],
                 [""],
-                ["", <div class="inline">
+                ["", <div key="terminal-colors" class="inline">
                     {[
                         "text-text",
                         "text-subtext1",
@@ -110,7 +110,7 @@ export default function Terminal({ className }: TerminalProps = {}) {
                         "text-yellow",
                         "text-green",
                         "text-red"
-                    ].map(col => <span class={col}>■ </span>)}
+                    ].map((col, i) => <span key={i} class={col}>■ </span>)}
                 </div>]
             ].map(([n, v]: [string, string | string[]], _, arr) => {
                 const keyStr = n.padEnd(
@@ -120,10 +120,10 @@ export default function Terminal({ className }: TerminalProps = {}) {
 
                 const valStr =
                         Array.isArray(v)
-                        ? <div className="flex flex-col">{v.map(x => <div>┃ {" ".repeat(keyStr.length)}{x}</div>)}</div>
+                        ? <div className="flex flex-col">{v.map((x, i) => <div key={`value-${n}-${i}`}>┃ {" ".repeat(keyStr.length)}{x}</div>)}</div>
                         : v
 
-                return <div>
+                return <div key={`entry-${n}`}>
                     ┃ <span className="text-teal font-bold">{keyStr}</span>
                     {valStr}
                 </div>

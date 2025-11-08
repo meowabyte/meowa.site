@@ -15,8 +15,8 @@ function Page() {
                 <a role="button" href="#social" className="important">My Social Media</a>
             </div>
         </div>
-        <AboutMe />
         <ProgressYear />
+        <AboutMe />
         <TimeOnPage />
     </div>
 }
