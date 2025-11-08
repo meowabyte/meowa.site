@@ -3,11 +3,12 @@ import Terminal from "./components/terminal";
 import ProgressYear from "./components/progressYear";
 import AboutMe from "./components/about";
 import TimeOnPage from "./components/timeOnPage";
+import Link from "./components/link";
 
 
 
 function Page() {
-    return <div className="py-15 flex flex-col gap-15 items-center">
+    return <div className="py-16 flex flex-col gap-15 items-center">
         <div className="flex flex-col gap-3">
             <h1 className="text-center">Welcome to <span class="font-bold rainbow-text">meowa.site</span>!</h1>
             <div className="text-subtext0 flex flex-row justify-center gap-5">
@@ -23,13 +24,18 @@ function Page() {
 
 export default function App() {
     return <>
-        <div className="h-screen">
+        <header className="h-screen">
             <Terminal className="absolute inset-1/2 -translate-1/2" />
-        </div>
-        <div className="min-h-screen py-5">
-            <div className="border-2 border-dotted border-surface0 mx-5 select-none">
+        </header>
+        <main className="min-h-screen py-5">
+            <div className="border-2 border-dotted border-surface0 mx-5 max-md:mx-1 select-none">
                 <Page />
             </div>
-        </div>
+        </main>
+        <footer className="flex flex-row gap-3 place-self-center m-10 text-subtext0">
+            <span>Made by meowabyte with &#x2764;</span>
+            &bull;
+            <Link href="https://github.com/meowabyte/meowabyte.github.io/blob/main/CREDITS.md">Credits</Link>
+        </footer>
     </>
 }

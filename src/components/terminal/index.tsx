@@ -1,7 +1,8 @@
-import { useEffect, useMemo, useRef, useState } from "preact/hooks";
-import { cn } from "../../helpers";
+import { useCallback, useEffect, useRef, useState } from "preact/hooks";
+import { cn, sleep } from "../../helpers";
 import s from "../../styles/components/terminal.module.css";
 import logo from "./logo.txt?raw"
+import { motion } from "motion/react";
 
 const calculateAge = (date: Date): string => {
     const now = new Date()
@@ -28,9 +29,50 @@ const calculateAge = (date: Date): string => {
     return parts.join(', ');
 }
 
-type TerminalProps = { className?: string }
+function NeofetchResult() {
+    return <div>
+        ┏━[ <span className="text-teal font-bold">meowabyte</span>@<span className="text-teal font-bold">meowa.site</span> ]━━━━━━━━━━━━━━━━━━━━╍╍╍ ╍╸ ╍╺  ╺
+        {[
+            ["NAME", "Jake"],
+            ["UPTIME", calculateAge(new Date("2005-05-27"))],
+            ["NATIONALITY", "Polish"],
+            ["OS", ["Arch Linux", "Windows 10 LTSC"]],
+            ["LANGUAGES", ["TypeScript", "Rust"]],
+            [""],
+            ["", <div key="terminal-colors" class="inline">
+                {[
+                    "text-text",
+                    "text-subtext1",
+                    "text-green",
+                    "text-pink",
+                    "text-blue",
+                    "text-yellow",
+                    "text-green",
+                    "text-red"
+                ].map((col, i) => <span key={i} class={col}>■ </span>)}
+            </div>]
+        ].map(([n, v]: [string, string | string[]], _, arr) => {
+            const keyStr = n.padEnd(
+                    Math.max(...arr.map(([k]: [string]) => k.length)),
+                    " "
+                ) + " ".repeat(5)
 
-export default function Terminal({ className }: TerminalProps = {}) {
+            const valStr =
+                    Array.isArray(v)
+                    ? <div className="flex flex-col">{v.map((x, i) => <div key={`value-${n}-${i}`}>┃ {" ".repeat(keyStr.length)}{x}</div>)}</div>
+                    : v
+
+            return <div key={`entry-${n}`}>
+                ┃ <span className="text-teal font-bold">{keyStr}</span>
+                {valStr}
+            </div>
+        })}
+        ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╍╍╍ ╍╸ ╍╺  ╺
+    </div>
+}
+
+type Props = { className?: string }
+export default function Terminal({ className }: Props = {}) {
     const ref = useRef<HTMLDivElement>(null)
 
     const [command, setCommand] = useState("")
@@ -54,96 +96,42 @@ export default function Terminal({ className }: TerminalProps = {}) {
         return () => window.removeEventListener("mousedown", checkActive)
     }, [ref, forceActive])
 
-    // animation
-    useEffect(() => {
-        if (!ref.current) return;
-
-        const typeCommand = async (str: string, delay: number) => {
-            for (const l of str) {
-                setCommand(cmd => cmd + l)
-                await new Promise(r => setTimeout(r, delay))
+    const startAnim = useCallback(async () => {
+        const typeCommand = async (text: string, delayMS: number) => {
+            for (const char of text) {
+                setCommand(cmd => cmd + char)
+                await sleep(delayMS)
             }
         }
 
-        const startAnim = async () => {
-            setCommand("")
-            setShowInfo(false)
-            setForceActive(true)
-            setValidCommand(false)
+        await typeCommand("neofetch", 50)
+        setValidCommand(true)
 
-            await ref.current.animate([{ width: 0 }, { width: "800px" }], { easing: "ease-out", duration: 700, fill: "forwards" }).finished
-            await ref.current.animate([{ height: 0 }, { height: "600px" }], { easing: "ease-out", duration: 600, fill: "forwards" }).finished
+        await sleep(300)
 
-            await typeCommand("neofetch", 50)
-            setValidCommand(true)
+        setCommand("")
+        setValidCommand(false)
+        setShowInfo(true)
+        setForceActive(false)
 
-            await new Promise(r => setTimeout(r, 300))
+        await sleep(600)
+        await typeCommand("scroll down for more! <3", 80)
+    }, [])
 
-            setCommand("")
-            setValidCommand(false)
-            setShowInfo(true)
-            setForceActive(false)
-
-            await new Promise(r => setTimeout(r, 600))
-            await typeCommand("scroll down for more! <3", 80)
-        }
-
-        setTimeout(startAnim, 500)
-    }, [ref])
-
-    const neofetchResult = useMemo(() => <>
-            ┏━[ <span className="text-teal font-bold">meowabyte</span>@<span className="text-teal font-bold">meowa.site</span> ]━━━━━━━━━━━━━━━━━━━━╍╍╍ ╍╸ ╍╺  ╺
-            {[
-                ["NAME", "Jake"],
-                ["UPTIME", calculateAge(new Date("2005-05-27"))],
-                ["NATIONALITY", "Polish"],
-                ["OS", ["Arch Linux", "Windows 10 LTSC"]],
-                ["LANGUAGES", ["TypeScript", "Rust"]],
-                [""],
-                ["", <div key="terminal-colors" class="inline">
-                    {[
-                        "text-text",
-                        "text-subtext1",
-                        "text-green",
-                        "text-pink",
-                        "text-blue",
-                        "text-yellow",
-                        "text-green",
-                        "text-red"
-                    ].map((col, i) => <span key={i} class={col}>■ </span>)}
-                </div>]
-            ].map(([n, v]: [string, string | string[]], _, arr) => {
-                const keyStr = n.padEnd(
-                        Math.max(...arr.map(([k]: [string]) => k.length)),
-                        " "
-                    ) + " ".repeat(5)
-
-                const valStr =
-                        Array.isArray(v)
-                        ? <div className="flex flex-col">{v.map((x, i) => <div key={`value-${n}-${i}`}>┃ {" ".repeat(keyStr.length)}{x}</div>)}</div>
-                        : v
-
-                return <div key={`entry-${n}`}>
-                    ┃ <span className="text-teal font-bold">{keyStr}</span>
-                    {valStr}
-                </div>
-            })}
-            ┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╍╍╍ ╍╸ ╍╺  ╺
-        </>,
-        []
-    )
-
-    return <div
-        className={cn(className, s.frame, isActive && s.active, "")}
+    return <motion.div
+        className={cn(className, s.frame, isActive && s.active, "max-sm:scale-50 max-md:scale-75")}
         ref={ref}
+        animate={{ width: "800px", height: "600px" }}
+        transition={{ ease: "easeInOut", width: { duration: 0.7 }, height: { duration: 0.6, delay: 0.7 } }}
+        onAnimationComplete={startAnim}
     >
         <div className="px-3 py-5 mx-5 mb-5 border-b-2 border-b-surface1">
             <span><span className="text-teal">meowabyte</span>@<span className="text-blue">meowa.site</span> <span className="text-yellow">~</span>&gt; </span>
             <span className={cn(s.blinker, isActive && s.active, validCommand ? "text-green" : "text-red")}>{command}</span>
         </div>
         {showInfo && <div className="flex flex-row">
-            <div className={cn("ml-10 whitespace-pre", s.rainbowtext)}>{logo}</div>
-            <div>{neofetchResult}</div>
+            <div className={cn("ml-10 whitespace-pre", s.rainbowText)}>{logo}</div>
+            <NeofetchResult />
         </div>}
-    </div>
+    </motion.div>
 }

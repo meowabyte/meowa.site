@@ -24,7 +24,7 @@ export default function TimeOnPage() {
 
         return () => clearInterval(i)
     }, [])
-    return <div className="flex flex-col border-3 p-3 items-center rainbow-border">
+    return <div className="flex flex-col border-3 p-3 items-center rainbow-border w-1/2 max-lg:w-3/4">
         <h3>You've been on this page for <span className="rainbow-text">{formatTime(timeSeconds)}</span>!</h3>
         <span>Thank you for checking it out! It really means a lot to me. &lt;3</span>
     </div>

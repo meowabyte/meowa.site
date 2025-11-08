@@ -27,13 +27,13 @@
         content: " ";
         @apply
             ml-1
-            border-[1px] border-rosewater;
+            border border-rosewater;
     }
 
     &.active::after { @apply bg-rosewater; }
 }
 
-.rainbowtext {
+.rainbowText {
   background: linear-gradient(
     to bottom,
     theme(--color-red),

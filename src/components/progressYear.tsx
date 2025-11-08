@@ -8,7 +8,7 @@ const EVENTS: { date: `${number}-${number}`, title: string, className?: string, 
     { date: `05-27`, title: "My birthday!", className: s.rainbow },
     { date: `09-14`, title: "1000 subs on YouTube! (2025)", className: "bg-white", link: "https://www.youtube.com/post/UgkxffXH5J0DeRMAlWN5vW2iGsqrS8-fU8DA" },
     { date: `11-05`, title: "Day of page release! (2025)", className: "bg-blue" },
-]
+] as const
 
 const formatDate = (date: `${number}-${number}`): string => {
     const [monthStr, dayStr] = date.split("-")
@@ -25,7 +25,7 @@ export default function ProgressYear() {
     const now = useMemo(() => new Date(), [])
     const timePassed = useMemo(() => calculateProgress(), [])
 
-    return <div className="flex flex-col gap-5 w-1/2">
+    return <div className="flex flex-col gap-5 w-1/2 max-lg:w-3/4 max-sm:w-4/5">
         <div className="text-center">
             <h2>We're currently this far into the year!</h2>
             <span className="text-subtext0">(and also additional events that happened)</span>
@@ -34,7 +34,7 @@ export default function ProgressYear() {
             <div className="w-full h-10 flex flex-row bg-surface0">
                 <div className="relative w-full h-full">
                     {
-                        EVENTS.map(({ date, title, className, link }, i) => {
+                        EVENTS.map(({ date, title, className, link }, i) => { // TODO: fix mobile preview
                             const progress = calculateProgress(new Date(`${now.getFullYear()}-${date}`))
 
                             const el = <div style={{ "--progress": `${progress}%` }} className={cn("absolute h-full w-2 transition-all duration-200 hover:w-8 z-10 left-(--progress) -translate-x-1/2 not-hover:*:hidden", className)}>
