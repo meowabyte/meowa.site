@@ -1,0 +1,49 @@
+@reference "@/styles/global.css";
+
+/* Terminal colors */
+.col0 { @apply text-subtext1 }
+.col1 { @apply text-red }
+.col2 { @apply text-green }
+.col3 { @apply text-yellow }
+.col4 { @apply text-blue }
+.col5 { @apply text-pink }
+.col6 { @apply text-teal }
+.col7 { @apply text-subtext0 }
+
+.frame {
+    @apply
+        bg-base
+        selection:bg-rosewater selection:text-crust overflow-y-auto
+        border-2 border-overlay0
+        flex flex-col
+        whitespace-pre-wrap break-all
+        cursor-text;
+
+    &:hover, &.active { @apply border-lavender; }
+}
+
+.blinker {
+    &::after {
+        content: " ";
+        @apply
+            ml-1
+            border-[1px] border-rosewater;
+    }
+
+    &.active::after { @apply bg-rosewater; }
+}
+
+.rainbowtext {
+  background: linear-gradient(
+    to bottom,
+    theme(--color-red),
+    theme(--color-peach),
+    theme(--color-yellow),
+    theme(--color-green),
+    theme(--color-blue),
+    theme(--color-mauve),
+    theme(--color-pink)
+  );
+  background-clip: text;
+  color: transparent;
+}

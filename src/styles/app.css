@@ -1,0 +1,60 @@
+@reference "@/styles/global.css";
+
+@keyframes scroll-x {
+    to { background-position: 200% center; }
+}
+
+@keyframes rainbow-rotate {
+	to { --rainbow-angle: 360deg; }
+}
+
+@property --rainbow-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@layer base {
+    body {
+        font-family: monospace;
+        background-color: theme(--color-crust);
+        color: theme(--color-text);
+    }
+
+    .important { @apply underline underline-offset-6 decoration-dotted hover:decoration-1; }
+
+    .rainbow-text {
+        background: linear-gradient(
+            90deg,
+            theme(--color-red),
+            theme(--color-peach),
+            theme(--color-yellow),
+            theme(--color-green),
+            theme(--color-blue),
+            theme(--color-mauve),
+            theme(--color-pink),
+            theme(--color-red)
+        );
+        background-size: 200% auto;
+        background-clip: text;
+        color: transparent;
+        animation: scroll-x 3s linear infinite;
+    }
+
+    .rainbow-border {
+        --rainbow-angle: 0deg;
+        border-image: conic-gradient(
+            from var(--rainbow-angle),
+            theme(--color-red),
+            theme(--color-peach),
+            theme(--color-yellow),
+            theme(--color-green),
+            theme(--color-blue),
+            theme(--color-mauve),
+            theme(--color-pink),
+            theme(--color-red)
+        ) 1;
+        
+        animation: 5s rainbow-rotate linear infinite;
+    }
+}

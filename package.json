@@ -1,0 +1,36 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "deploy": "bun run build && wrangler publish"
+  },
+  "dependencies": {
+    "@icons-pack/react-simple-icons": "^13.8.0",
+    "itty-router": "^5.0.22",
+    "preact": "^10.27.2",
+    "preact-iso": "^2.11.0",
+    "tailwindcss": "^4.1.17"
+  },
+  "devDependencies": {
+    "@cloudflare/vite-plugin": "^1.14.0",
+    "@cloudflare/workers-types": "^4.20251107.0",
+    "@preact/preset-vite": "^2.10.2",
+    "@tailwindcss/vite": "^4.1.17",
+    "@types/node": "^24.10.0",
+    "eslint": "^9.39.1",
+    "eslint-config-preact": "^2.0.0",
+    "preact-render-to-string": "^6.6.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.2.2",
+    "wrangler": "^4.46.0"
+  },
+  "eslintConfig": {
+    "extends": "preact"
+  },
+  "trustedDependencies": [
+    "@tailwindcss/oxide"
+  ]
+}

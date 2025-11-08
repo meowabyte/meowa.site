@@ -1,0 +1,26 @@
+@reference "@/styles/global.css";
+
+@keyframes scroll-y {
+    0% {
+        background-position: center 0%;
+    }
+    100% {
+        background-position: center 200%;
+    }
+}
+
+.rainbow {
+    background: linear-gradient(
+        to bottom,
+        theme(--color-red),
+        theme(--color-peach),
+        theme(--color-yellow),
+        theme(--color-green),
+        theme(--color-blue),
+        theme(--color-mauve),
+        theme(--color-pink),
+        theme(--color-red)
+    );
+    background-size: auto 200%;
+    animation: scroll-y 5s linear infinite;
+}

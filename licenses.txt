@@ -1,0 +1,6 @@
+Favicon icon is a slightly modified version of Star SVG Vector made by Radhika Paghdal
+https://www.svgrepo.com/svg/423774/star
+Used under CC Attribution License
+
+Color Palette: Catppuccin Mocha Mauve
+https://github.com/catppuccin/palette
