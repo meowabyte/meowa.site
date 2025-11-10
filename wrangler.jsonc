@@ -1,5 +1,5 @@
 {
-  "name": "meowpa-ws-worker",
+  "name": "meowasite",
   "compatibility_date": "2025-04-03",
   "main": "./api/index.ts",
   "assets": {
