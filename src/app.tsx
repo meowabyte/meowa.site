@@ -35,7 +35,7 @@ export default function App() {
         <footer className="flex flex-row gap-3 place-self-center m-10 text-subtext0">
             <span>Made by meowabyte with &#x2764;</span>
             &bull;
-            <Link href="https://github.com/meowabyte/meowabyte.github.io/blob/main/CREDITS.md">Credits</Link>
+            <Link href="https://github.com/meowabyte/meowa.site/blob/main/CREDITS.md">Credits</Link>
         </footer>
     </>
 }
