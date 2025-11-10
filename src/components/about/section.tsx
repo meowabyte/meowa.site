@@ -26,7 +26,7 @@ export default function Section({ children, image, place = "left", title, classN
     return <motion.div
             initial={{ ...initial, opacity: "0%" }}
             whileInView={{ ...animation, opacity: "100%" }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
             className="flex flex-col items-center border-2 border-surface0 w-4/5 py-10 px-20 max-md:px-5"
         >
         {title && <div className="mb-10 w-96 text-center">
