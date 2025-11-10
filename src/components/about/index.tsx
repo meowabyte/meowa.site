@@ -1,11 +1,11 @@
-import ytImg from "@/assets/imgs/yt.webp"
-import LinkedAnchor from "../linkedAnchor"
-import Section from "./section"
 import { IconType, SiBluesky, SiDiscord, SiGithub, SiTelegram, SiYoutube } from "@icons-pack/react-simple-icons"
 import { type LucideIcon, Mail } from "lucide-preact"
 import { useCallback, useMemo, useState } from "preact/hooks"
 import { cn } from "@/helpers"
-import Link from "../link"
+import Link from "@/components/link"
+import LinkedAnchor from "@/components/linkedAnchor"
+import Section from "./section"
+import ytImg from "@/assets/imgs/yt.webp"
 
 type SocialButtonProps = {
     icon: IconType | LucideIcon,

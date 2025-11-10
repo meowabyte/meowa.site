@@ -1,6 +1,6 @@
-import { hydrate, prerender as ssr } from 'preact-iso';
 import '@/styles/global.css';
-import App from "./app"
+import { hydrate, prerender as ssr } from 'preact-iso';
+import App from "@/app"
 
 if (typeof window !== 'undefined')
 	hydrate(<App />, document.getElementById('app'));

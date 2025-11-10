@@ -1,8 +1,8 @@
+import { cn, sleep } from "@/helpers";
 import { useCallback, useEffect, useRef, useState } from "preact/hooks";
-import { cn, sleep } from "../../helpers";
-import s from "../../styles/components/terminal.module.css";
 import logo from "./logo.txt?raw"
 import { motion } from "motion/react";
+import s from "@/styles/components/terminal.module.css";
 
 const calculateAge = (date: Date): string => {
     const now = new Date()

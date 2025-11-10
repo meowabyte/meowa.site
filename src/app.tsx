@@ -1,9 +1,9 @@
-import "./styles/app.css";
-import Terminal from "./components/terminal";
-import ProgressYear from "./components/progressYear";
-import AboutMe from "./components/about";
-import TimeOnPage from "./components/timeOnPage";
-import Link from "./components/link";
+import "@/styles/app.css";
+import AboutMe from "@/components/about";
+import Link from "@/components/link";
+import ProgressYear from "@/components/progressYear";
+import Terminal from "@/components/terminal";
+import TimeOnPage from "@/components/timeOnPage";
 
 
 

@@ -1,9 +1,9 @@
-import preactPlugin from '@preact/preset-vite';
-import tailwindCssPlugin from '@tailwindcss/vite';
 import { cloudflare } from "@cloudflare/vite-plugin"
-
 import { defineConfig } from 'vite';
 import { join } from "path"
+import preactPlugin from '@preact/preset-vite';
+import tailwindCssPlugin from '@tailwindcss/vite';
+
 
 // https://vitejs.dev/config/
 export default defineConfig({

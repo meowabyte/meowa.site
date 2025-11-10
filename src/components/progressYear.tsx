@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
-import s from "../styles/app.module.css"
-import { cn } from "../helpers"
+import { cn } from "@/helpers"
+import s from "@/styles/app.module.css"
 
 const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as const;
 
