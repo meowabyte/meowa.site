@@ -14,7 +14,17 @@
   inherits: false;
 }
 
+
 @layer base {
+    ::-webkit-scrollbar-thumb {
+        background-color: theme(--color-blue);
+        background-clip: padding-box;  
+    }
+    ::-webkit-scrollbar {
+        width: 8px;
+        background-color: theme(--color-base);
+    }
+
     body {
         font-family: monospace;
         background-color: theme(--color-crust);
