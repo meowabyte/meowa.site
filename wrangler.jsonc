@@ -3,6 +3,8 @@
   "name": "meowasite",
   "compatibility_date": "2025-04-03",
   "main": "./api/index.ts",
+  "preview_urls": false,
+  "workers_dev": false,
   "assets": {
     "not_found_handling": "404-page",
     "html_handling": "drop-trailing-slash",
