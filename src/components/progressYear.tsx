@@ -2,8 +2,6 @@ import { useCallback, useEffect, useMemo, useRef, useState } from "preact/hooks"
 import { cn } from "@/helpers"
 import s from "@/styles/app.module.css"
 
-const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"] as const;
-
 type ProgressEventType = { date: `${number}-${number}`, title: string, className?: string, link?: string }
 const EVENTS: ProgressEventType[] = [
     { date: `05-27`, title: "My birthday!", className: s.rainbow },
@@ -11,16 +9,16 @@ const EVENTS: ProgressEventType[] = [
     { date: `11-05`, title: "Day of page release! (2025)", className: "bg-blue" },
 ] as const
 
-const formatDateSimple = (date: `${number}-${number}`): string => {
-    const [monthStr, dayStr] = date.split("-")
-    return `${dayStr} ${MONTHS[parseInt(monthStr, 10) - 1].slice(0, 3)}`
-}
-
 const calculateProgressInYear = (time: Date = new Date()) => {
     const start = new Date(`${time.getFullYear()}`)
     const end = new Date(`${time.getFullYear() + 1}`)
     return (Number(time) - Number(start)) / (Number(end) - Number(start)) * 100
 }
+
+const dateFormatter = new Intl.DateTimeFormat("en-US", {
+  day: "numeric",
+  month: "short"
+})
 
 function ProgressEvent({ event: { date, title, className, link }, isActive, makeActive }: { event: ProgressEventType, isActive: boolean, makeActive: () => void }) { // TODO: fix mobile preview
     const progress = useMemo(() => calculateProgressInYear(new Date(`${new Date().getFullYear()}-${date}`)), [date])
@@ -47,7 +45,7 @@ function ProgressEvent({ event: { date, title, className, link }, isActive, make
                 "absolute top-[calc(100%+10px)] w-52",
                 link && "important"
             )}
-        ><b>{formatDateSimple(date)}</b> - {title}</span>
+        ><b>{dateFormatter.format(new Date(date))}</b> - {title}</span>
     </div>
 } 
 

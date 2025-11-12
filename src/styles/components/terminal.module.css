@@ -1,15 +1,5 @@
 @reference "@/styles/global.css";
 
-/* Terminal colors */
-.col0 { @apply text-subtext1 }
-.col1 { @apply text-red }
-.col2 { @apply text-green }
-.col3 { @apply text-yellow }
-.col4 { @apply text-blue }
-.col5 { @apply text-pink }
-.col6 { @apply text-teal }
-.col7 { @apply text-subtext0 }
-
 .frame {
     @apply
         bg-base

@@ -5,7 +5,7 @@ import { cn } from "@/helpers"
 import Link from "@/components/link"
 import LinkedAnchor from "@/components/linkedAnchor"
 import Section from "./section"
-import ytImg from "@/assets/imgs/yt.webp"
+import ytImg from "@/assets/images/yt.webp"
 
 type SocialButtonProps = {
     icon: IconType | LucideIcon,
@@ -51,7 +51,7 @@ export default function AboutMe() {
     return <>
         <Section
             title={<h2><LinkedAnchor id="about">...but <span className="important">who am I</span>?</LinkedAnchor></h2>}
-            image="https://avatars.githubusercontent.com/u/47297843"
+            image="/assets/images/avatar.webp"
         >
             <div className="flex flex-col gap-10">
                 <span>
@@ -107,4 +107,4 @@ export default function AboutMe() {
             </div>
         </Section>
     </>
-} // TODO: finish contact page
+}
