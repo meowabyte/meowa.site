@@ -86,7 +86,7 @@ export default function AboutMe() {
             </span>
             <div className="flex flex-row max-md:flex-col gap-5 justify-center">
                 <SocialButton icon={SiYoutube} name="YouTube" url="https://youtube.com/@meowabyte" />
-                <SocialButton icon={SiBluesky} name="Bluesky" url="https://bsky.app/profile/@meowabyte.lol" />
+                <SocialButton icon={SiBluesky} name="Bluesky" url="https://bsky.app/profile/meowabyte.lol" />
                 <SocialButton icon={SiGithub} name="GitHub" url="https://github.com/meowabyte" />
                 <SocialButton icon={SiDiscord} name="Discord Server" url="https://discord.gg/tqssnTUxDR" />
             </div>
