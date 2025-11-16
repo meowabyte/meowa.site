@@ -1,6 +1,6 @@
-import { IconType, SiBluesky, SiDiscord, SiGithub, SiTelegram, SiYoutube } from "@icons-pack/react-simple-icons"
+import { IconType, SiBluesky, SiDiscord, SiGithub, SiMastodon, SiTelegram, SiYoutube } from "@icons-pack/react-simple-icons"
 import { type LucideIcon, Mail } from "lucide-preact"
-import { useCallback, useMemo, useState } from "preact/hooks"
+import { useCallback, useState } from "preact/hooks"
 import { cn } from "@/helpers"
 import Link from "@/components/link"
 import LinkedAnchor from "@/components/linkedAnchor"
@@ -16,13 +16,11 @@ type SocialButtonProps = {
 function SocialButton({ icon, name, text, url }: SocialButtonProps) {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const Icon = icon as any // react typing problem :(
-
     const [copied, setCopied] = useState(false)
-
-    const tooltipText = useMemo(() => {
-        if (text) return `Copy ${name} to clipboard`
-        if (url) return `Visit ${name}`
-    }, [name, text, url])
+    const tooltipText =
+        text ? `Copy ${name} to clipboard`
+        : url ? `Visit ${name}`
+        : undefined
 
     const onClick = useCallback(() => {
         if (copied) return;
@@ -87,6 +85,7 @@ export default function AboutMe() {
             <div className="flex flex-row max-md:flex-col gap-5 justify-center">
                 <SocialButton icon={SiYoutube} name="YouTube" url="https://youtube.com/@meowabyte" />
                 <SocialButton icon={SiBluesky} name="Bluesky" url="https://bsky.app/profile/meowabyte.lol" />
+                <SocialButton icon={SiMastodon} name="Mastodon" url="https://goingdark.social/@meowabyte" />
                 <SocialButton icon={SiGithub} name="GitHub" url="https://github.com/meowabyte" />
                 <SocialButton icon={SiDiscord} name="Discord Server" url="https://discord.gg/tqssnTUxDR" />
             </div>

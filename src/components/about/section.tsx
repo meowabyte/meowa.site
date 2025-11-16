@@ -1,7 +1,6 @@
 import { motion, TargetAndTransition } from "motion/react"
 import { cn } from "@/helpers"
 import { ComponentChildren } from "preact"
-import { useMemo } from "preact/hooks"
 
 type Props = {
     children?: ComponentChildren,
@@ -12,16 +11,13 @@ type Props = {
 }
 
 export default function Section({ children, image, place = "left", title, className }: Props) {
-    const initial = useMemo<TargetAndTransition>(() =>
-        (image
-            ? place === "left" ? { translateX: "-10px" } : { translateX: "10px" }
+    const initial: TargetAndTransition =
+        image ? { translateX: place === "left" ? "-10px" : "10px" }
             : { scale: "50%" }
-        ),
-    [image, place])
 
-    const animation = useMemo<TargetAndTransition>(() =>
-        (image ? { translateX: "0px" } : { scale: "100%" }),
-    [image])
+    const animation: TargetAndTransition =
+        image ? { translateX: "0px" } : { scale: "100%" }
+
 
     return <motion.div
             initial={{ ...initial, opacity: "0%" }}

@@ -23,12 +23,13 @@ const dateFormatter = new Intl.DateTimeFormat("en-US", {
 function ProgressEvent({ event: { date, title, className, link }, isActive, makeActive }: { event: ProgressEventType, isActive: boolean, makeActive: () => void }) { // TODO: fix mobile preview
     const progress = useMemo(() => calculateProgressInYear(new Date(`${new Date().getFullYear()}-${date}`)), [date])
 
-    const onClick = useCallback((e: PointerEvent) => {
+    const onClick = (e: PointerEvent) => {
         e.stopPropagation()
 
-        if ((isActive || e.pointerType === "mouse") && link) return window.open(link, "_blank", "noreferrer")
+        if ((isActive || e.pointerType === "mouse") && link)
+            return window.open(link, "_blank", "noreferrer")
         makeActive()
-    }, [link, isActive, makeActive])
+    }
 
     return <div
         style={{ "--progress": `${progress}%` }}
