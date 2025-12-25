@@ -11,7 +11,7 @@
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.8.0",
     "itty-router": "^5.0.22",
-    "lucide-preact": "^0.553.0",
+    "lucide-preact": "^0.562.0",
     "motion": "^12.23.26",
     "preact": "^10.28.0",
     "preact-iso": "^2.11.1",
