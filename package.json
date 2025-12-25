@@ -11,15 +11,15 @@
   "dependencies": {
     "@icons-pack/react-simple-icons": "^13.8.0",
     "itty-router": "^5.0.22",
-    "lucide-preact": "^0.553.0",
+    "lucide-preact": "^0.562.0",
     "motion": "^12.23.26",
-    "preact": "^10.28.0",
+    "preact": "^10.28.1",
     "preact-iso": "^2.11.1",
     "tailwindcss": "^4.1.18"
   },
   "devDependencies": {
     "@cloudflare/vite-plugin": "^1.19.0",
-    "@cloudflare/workers-types": "^4.20251218.0",
+    "@cloudflare/workers-types": "^4.20251225.0",
     "@preact/preset-vite": "^2.10.2",
     "@tailwindcss/vite": "^4.1.18",
     "@types/node": "^24.10.4",
@@ -27,7 +27,7 @@
     "eslint-config-preact": "^2.0.0",
     "preact-render-to-string": "^6.6.4",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.50.0",
+    "typescript-eslint": "^8.50.1",
     "vite": "^7.3.0",
     "wrangler": "^4.56.0"
   },
